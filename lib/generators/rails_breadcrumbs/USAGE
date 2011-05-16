@@ -1,0 +1,3 @@
+Description:
+  The rails_breadcrumbs generator creates an home icons at public/breadcrumbs
+  and rails_breadcrumbs css & cass at public/stylesheets/ directory.

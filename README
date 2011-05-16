@@ -1,92 +1,33 @@
 RailsBreadcrumbs
 ===================
 
-RailsBreadcrumbs is a gem that implements captcha for using in Rails application.
-The gem provides functionality to create a captcha image and validate user's input.
+RailsBreadcrumbs is a gem that implements breadcrumbs.
 
-* The gem allows multiple captchas at the same page
+* The gem supports ruby 1.9.x & rails 3.x
+* The gem allows to create breadcrumbs based on path
 * The gem allows ...
 
 Quick Start
 =======
 
-In your model:
-
-  class MuscleUser < ActiveRecord::Base
-    include RMagickCaptcha
-
-    # Server create captcha_key, user input captcha_text
-    attr_accessor :captcha_key, :captcha_text
-
-    # Validate captcha
-    def validate_captcha
-      if (RAILS_ENV != 'test' && @captcha_text != @captcha_key)
-        # TODO: use a localised text
-        errors.add(:captcha_text,"is invalid")
-        false
-      end
-    end
-  end
-
 In your controller:
 
-  def new
-    # Generate new captcha key
-    session[:muscle_user_captcha] = MuscleUser.get_captcha_key
-    @muscle_user = MuscleUser.new
-  end
-
-  def create
-    cookies.delete :auth_token
-    # protects against session fixation attacks, wreaks havoc with
-    # request forgery protection.
-    # uncomment at your own risk
-    # reset_session
-    @muscle_user = MuscleUser.new(params[:muscle_user])
-    @muscle_user.captcha_key = session[:muscle_user_captcha]
-    @muscle_user.registration_host = request.host_with_port
-    @muscle_user.save
-    if @muscle_user.errors.empty?
-      session[:muscle_user_captcha] = nil
-      # User valid only after account activation
-      # self.current_muscle_user = @muscle_user
-      redirect_back_or_default('/welcome')
-      flash[:notice] = "Thanks for signing up!"
-    else
-      # Generate new captcha key
-      session[:muscle_user_captcha] = MuscleUser.get_captcha_key
-      render :action => 'new'
-    end
-  end
+  before_filter :add_breadcrumbs_by_path
 
 In your views:
 
-  <% form_for @muscle_user, :url => muscle_users_path,
-     :html => {:id => "muscle_user_form", :class => "basic-form" } do |f| %>
-    <%= render :partial => "header" %>
-    <%= f.error_messages %>
-    <fieldset>
-      <%= render :partial => "section2" %>
-      <ul>
-        <li>
-          <%= image_tag "/captcha", :alt => "captcha", :title => "captcha" %>
-          <%= f.text_field :captcha_text, :maxlength => 16%>
-          <%= f.error_message_on :captcha_text %>
-        </li>
-      </ul>
-      <%= f.submit button_label, :class => 'blue-button'  %>
-    </fieldset>
-  <% end %>
+  <%= render_breadcrumbs %>
 
-In your routes.rb:
+If you wish:
 
-  map.captcha '/captcha', :controller => 'muscle_users', :action => 'captcha'
+  -Run ruby script/rails generate rails_breadcrumbs to gen resources such as css, sass and png files.
+  -Use config/initiaizers to configure options for this gem
 
 
 Installation
 =======
 
-* Type 'gem install --local rmagick_captcha' with root account if you have installed RubyGems.
+* Type 'gem install --local rails_breadcrumbs' with root account if you have installed RubyGems.
 
 
 Example
@@ -98,11 +39,6 @@ Example goes here.
 TODO
 =======
 
-* Metaprogram def captcha
-* Write generator to supply captcha_controller(?)
 * Add tests
-* Add backend with a predefined images (and sound?)
-* Add visual effects (3d, grey and etc)
-
 
 Copyright (c) 2011 arufanov, released under the MIT license.

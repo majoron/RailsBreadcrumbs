@@ -1,0 +1,23 @@
+/* =Breadcrumbs styles
+ * This section contains breadcrumb's styles for markup
+ * <div id="breadcrumbs">
+ *   <span>You are here:</span> <%= render_breadcrumbs %>
+ * </div>
+ */
+#breadcrumbs
+  float: left
+  span
+    float: left
+    font-size: 120%
+  ul.breadcrumbs
+    float: left
+    li
+      border: 1px
+      float: left
+    li.first_breadcrumb_item
+      border: 1px
+    li.last_breadcrumb_item
+      a
+        font-weight: bold
+      span
+        font-weight: bold
