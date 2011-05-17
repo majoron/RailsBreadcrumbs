@@ -51,7 +51,7 @@ module RailsBreadcrumbs
       if @breadcrumbs
         @breadcrumbs[0..-2].each do |txt, path|
           output << content_tag(:li, {:class => "last_breadcrumb_item"}, false) do
-            link_to( h(@breadcrumbs.last.first) + raw(options[:item_separator]), @breadcrumbs.last.second)
+            link_to( h(txt) + raw(options[:item_separator]), path)
           end
         end
       end
@@ -72,5 +72,6 @@ module RailsBreadcrumbs
       # Return result
       content_tag('ul', output, {:class => options[:css_class]}, false)
     end
+
   end
 end
