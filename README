@@ -9,6 +9,9 @@ RailsBreadcrumbs is a gem that implements breadcrumbs.
 
 Quick Start
 =======
+In your Gemfile:
+
+  gem "rails_breadcrumbs", ">= 0.5.1"
 
 In your controller:
 

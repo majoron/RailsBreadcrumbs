@@ -1,7 +1,8 @@
-# RailsBreadcrumbs
+#
 module RailsBreadcrumbs
-  # ::Rails.logger.error("...")
   module ControllerAdditions
+    # ::Rails.logger.error("...")
+
     # default options that can be overridden on the global level
     @@breadcrumbs_options = {
       :locale_root       => 'navigation.breadcrumbs.',  #

@@ -1,8 +1,8 @@
-# RailsBreadcrumbs
+#
 module RailsBreadcrumbs
-  # ::Rails.logger.error("...")
-
   module ViewAdditions
+    # ::Rails.logger.error("...")
+
     # default options that can be overridden on the global level
     @@breadcrumbs_options = {
       :home_controller          => 'welcome',                 #

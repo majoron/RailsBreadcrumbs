@@ -1,6 +1,6 @@
-# RailsBreadcrumbs
+#
 module RailsBreadcrumbs
-  # ::Rails.logger.error("...")
   module ModelAdditions
+    # ::Rails.logger.error("...")
   end
 end
