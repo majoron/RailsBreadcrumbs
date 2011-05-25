@@ -13,5 +13,5 @@ Gem::Specification.new do |s|
   s.executables = Dir.glob('bin/*').collect {|f| File.basename(f)}
   s.require_paths << 'doc' << 'examples' << 'lib' << 'test'
   s.has_rdoc = true
-  s.required_ruby_version = '>= 1.9.2'
+  s.required_ruby_version = '>= 1.8.7'
 end
