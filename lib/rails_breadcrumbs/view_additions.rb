@@ -3,19 +3,6 @@ module RailsBreadcrumbs
   module ViewAdditions
     # ::Rails.logger.error("...")
 
-    # default options that can be overridden on the global level
-    @@breadcrumbs_options = {
-      :home_controller          => 'welcome',                 #
-      :home_action              => 'index',                   #
-      :item_separator           => '&gt;',                    #
-      :css_class                => 'breadcrumbs',             #
-      :fist_item_css_class      => 'first_breadcrumb_item',   #
-      :last_item_css_class      => 'last_breadcrumb_item',    #
-      :make_last_item_as_link   => true,                      #
-      :include_home_icon        => true,                      #
-    }
-    mattr_reader :breadcrumbs_options
-
     #
     # Renders breadcrumbs
     #
@@ -37,7 +24,7 @@ module RailsBreadcrumbs
     #
     def render_breadcrumbs(options = {})
       output = ""
-      options = @@breadcrumbs_options.merge(options)
+      options = ::RailsBreadcrumbs.options.merge(options)
 
       # First item is home
       if options[:include_home_icon]
