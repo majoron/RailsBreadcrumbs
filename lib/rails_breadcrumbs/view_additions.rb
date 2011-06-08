@@ -30,7 +30,7 @@ module RailsBreadcrumbs
       if options[:include_home_icon]
         output << content_tag(:li, {:class => "first_breadcrumb_item"}, false) do
           link_to(image_tag("breadcrumbs/home.png", {:alt => "Home", :title => "Home"}) + raw(options[:item_separator]),
-            :controller => options[:home_controller], :action => options[:home_controller])
+            options[:home_path])
         end
       end
 

@@ -16,3 +16,4 @@ that bug was created for 1.0 version of the AntHill component, bug is feature re
  -----------
 0.5 { Bug Report } [ RailsBreadcrumbs ] / X / Changelog, roadmap, knownbugs have been created
 0.5 { Bug Report } [ RailsBreadcrumbs ] / X / Use include, extend instead of class_eval
+0.5 { Bug Report } [ RailsBreadcrumbs ] / X / home_controller, home_action has been changed to home_path
