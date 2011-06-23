@@ -34,6 +34,14 @@ module RailsBreadcrumbs
         end
       end
 
+      # First item is home
+      if options[:include_home_label]
+        output << content_tag(:li, {:class => "first_breadcrumb_item"}, false) do
+          link_to( h(options[:home_label]) + raw(options[:item_separator]),
+            options[:home_path])
+        end
+      end
+
       # Midle items
       if @breadcrumbs
         @breadcrumbs[0..-2].each do |txt, path|

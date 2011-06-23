@@ -13,13 +13,15 @@ module RailsBreadcrumbs
   # default options that can be overridden on the global level
   @@options = {
       :locale_root              => 'navigation.breadcrumbs.', #
-      :home_path                => '/welcome',                 #
-      :item_separator           => '&gt;',                    #
+      :home_path                => '/welcome',                #
+      :home_label               => 'Home',                    #
+      :item_separator           => ' &gt;',                   #
       :css_class                => 'breadcrumbs',             #
       :fist_item_css_class      => 'first_breadcrumb_item',   #
       :last_item_css_class      => 'last_breadcrumb_item',    #
       :make_last_item_as_link   => true,                      #
       :include_home_icon        => true,                      #
+      :include_home_label       => false,                      #
   }
   mattr_reader :options
 

@@ -11,7 +11,7 @@ Quick Start
 =======
 In your Gemfile:
 
-  gem "rails_breadcrumbs", ">= 0.5.1"
+  gem "rails_breadcrumbs", ">= 0.5.2"
 
 In your controller:
 
