@@ -1,7 +1,7 @@
 require 'date'
 Gem::Specification.new do |s|
   s.name = %q{rails_breadcrumbs}
-  s.version = "0.5.2"
+  s.version = "0.5.3"
   s.date = Date.today.to_s
   s.summary = %q{RailsBreadcrumbs is a gem that implements breadcrumbs.}
   s.description = %q{RailsBreadcrumbs is a gem that implements breadcrumbs.}

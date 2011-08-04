@@ -29,16 +29,16 @@ module RailsBreadcrumbs
       # First item is home
       if options[:include_home_icon]
         output << content_tag(:li, {:class => "first_breadcrumb_item"}, false) do
-          link_to(image_tag("breadcrumbs/home.png", {:alt => "Home", :title => "Home"}) + raw(options[:item_separator]),
-            options[:home_path])
+          link_to(image_tag("breadcrumbs/home.png", {:alt => "Home", :title => "Home"}),options[:home_path]) +
+          (@breadcrumbs && @breadcrumbs.size() > 0 ? raw(options[:item_separator]) : "")
         end
       end
 
       # First item is home
       if options[:include_home_label]
         output << content_tag(:li, {:class => "first_breadcrumb_item"}, false) do
-          link_to( h(options[:home_label]) + raw(options[:item_separator]),
-            options[:home_path])
+          link_to( h(options[:home_label]), options[:home_path]) +
+          (@breadcrumbs && @breadcrumbs.size() > 0 ? raw(options[:item_separator]) : "")
         end
       end
 
@@ -46,7 +46,7 @@ module RailsBreadcrumbs
       if @breadcrumbs
         @breadcrumbs[0..-2].each do |txt, path|
           output << content_tag(:li, {:class => "last_breadcrumb_item"}, false) do
-            link_to( h(txt) + raw(options[:item_separator]), path)
+            link_to( h(txt), path) + raw(options[:item_separator])
           end
         end
       end
