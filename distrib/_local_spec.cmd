@@ -16,7 +16,7 @@ SET PATH=%PATH%;C:/Binutils/rubygems-1.3.5/bin
 
 Rem: set enviroment and execute ant script
 cd ./..
-rem rspec ./spec
+rspec ./spec
 rem rspec ./spec/lib/rails_breadcrumbs_spec.rb
 rem rspec ./spec/lib/rails_breadcrumbs/controller_additions_spec.rb
 cd ./distrib
