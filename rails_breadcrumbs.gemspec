@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description = %q{RailsBreadcrumbs is a gem that implements breadcrumbs.}
   s.author = %q{Artem Rufanov}
   s.email = %q{developers@majoron.com}
-  s.homepage = %q{http://www.majoron.com/}
+  s.homepage = %q{http://www.majoron.com/project/rbundle/rails_breadcrumbs}
   s.files = Dir.glob('**/*') - Dir.glob('distrib/**/*') - Dir.glob('lib/api/**/*') - Dir.glob('doc/*.xpr')
   s.bindir = 'bin'
   s.executables = Dir.glob('bin/*').collect {|f| File.basename(f)}
