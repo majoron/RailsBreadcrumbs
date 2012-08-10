@@ -25,11 +25,12 @@ module RailsBreadcrumbs
     def render_breadcrumbs(options = {})
       output = ""
       options = ::RailsBreadcrumbs.options.merge(options)
+      home = I18n.t(options[:locale_root] + options[:home_label], :default => options[:home_label])
 
       # First item is home
       if options[:include_home_icon]
         output << content_tag(:li, {:class => "first_breadcrumb_item"}, false) do
-          link_to(image_tag("breadcrumbs/home.png", {:alt => "Home", :title => "Home"}),options[:home_path]) +
+          link_to(image_tag("breadcrumbs/home.png", {:alt => home, :title => home}),options[:home_path]) +
           (@breadcrumbs && @breadcrumbs.size() > 0 ? raw(options[:item_separator]) : "")
         end
       end
@@ -37,7 +38,7 @@ module RailsBreadcrumbs
       # First item is home
       if options[:include_home_label]
         output << content_tag(:li, {:class => "first_breadcrumb_item"}, false) do
-          link_to( h(options[:home_label]), options[:home_path]) +
+          link_to( h(home), options[:home_path]) +
           (@breadcrumbs && @breadcrumbs.size() > 0 ? raw(options[:item_separator]) : "")
         end
       end
