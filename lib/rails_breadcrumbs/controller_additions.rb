@@ -1,23 +1,19 @@
-#
 module RailsBreadcrumbs
   module ControllerAdditions
-    # ::Rails.logger.error("...")
+    extend ActiveSupport::Concern
 
-    #
-    def self.add_breadcrumb(name, url, options = {})
-      before_filter options do |controller|
-        controller.send(:add_breadcrumb, name, url)
+    included do
+      extend ClassMethods
+    end
+
+    module ClassMethods
+      def add_breadcrumb(name, url, options = {})
+        before_filter options do |controller|
+          controller.send(:add_breadcrumb, name, url)
+        end
       end
     end
 
-    # Add breadcrumb for page
-    def add_breadcrumb name, url = ''
-      @breadcrumbs ||= []
-      url = eval(url) if url =~ /_path|_url|@/
-      @breadcrumbs << [name, url]
-    end
-
-    #
     def add_breadcrumbs_by_path(names = {}, options = {})
       options = ::RailsBreadcrumbs.options.merge(options)
       path_parts = controller_path.split('/')
@@ -39,7 +35,6 @@ module RailsBreadcrumbs
       end
     end
 
-    #
     def add_breadcrumbs_with_action_by_path(names = {}, options = {})
       options = ::RailsBreadcrumbs.options.merge(options)
       path_parts = controller_path.split('/') << action_name
@@ -60,5 +55,13 @@ module RailsBreadcrumbs
         add_breadcrumb(name, link)
       end
     end
+
+    private
+      # Add breadcrumb for page
+      def add_breadcrumb name, url = ''
+        @breadcrumbs ||= []
+        url = eval(url.to_s) if url =~ /_path|_url|@/
+        @breadcrumbs << [name, url]
+      end
   end
 end
