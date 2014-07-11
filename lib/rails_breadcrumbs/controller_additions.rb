@@ -14,6 +14,21 @@ module RailsBreadcrumbs
       end
     end
 
+    def add_breadcrumb_with_parent(object, path, options={})
+      return unless object.present?
+      if defined?(Ancestry) && Ancestry::InstanceMethods.instance_methods.include?(:path)
+        object.path.each do |element|
+          make_url_and_add_breadcrumb(element, path, options)
+        end
+      elsif object.parent.present?
+        [object.parent, object].each do |element|
+          make_url_and_add_breadcrumb(element, path, options)
+        end
+      else
+        make_url_and_add_breadcrumb(object, path, options)
+      end
+    end
+
     def add_breadcrumbs_by_path(names = {}, options = {})
       options = ::RailsBreadcrumbs.options.merge(options)
       path_parts = controller_path.split('/')
@@ -62,6 +77,12 @@ module RailsBreadcrumbs
         @breadcrumbs ||= []
         url = eval(url.to_s) if url =~ /_path|_url|@/
         @breadcrumbs << [name, url]
+      end
+
+      def make_url_and_add_breadcrumb(object, path, options)
+        url_option = options[:url_option].present? ? options[:url_option] : object.class.name.underscore
+        url = path.to_s + "(#{url_option}: '#{object.slug}')"
+        send(:add_breadcrumb, object.name, url)
       end
   end
 end
