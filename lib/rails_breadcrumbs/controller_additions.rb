@@ -81,8 +81,9 @@ module RailsBreadcrumbs
 
       def make_url_and_add_breadcrumb(object, path, options)
         url_option = options[:url_option].present? ? options[:url_option] : object.class.name.underscore
+        name = options[:name].present? ? options[:name] : "name"
         url = path.to_s + "(#{url_option}: '#{object.slug}')"
-        send(:add_breadcrumb, object.name, url)
+        send(:add_breadcrumb, object[name], url)
       end
   end
 end
