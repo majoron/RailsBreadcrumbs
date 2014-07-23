@@ -21,7 +21,8 @@ module RailsBreadcrumbs
       :last_item_css_class      => 'last_breadcrumb_item',    #
       :make_last_item_as_link   => true,                      #
       :include_home_icon        => true,                      #
-      :include_home_label       => false,                      #
+      :include_home_label       => false,                     #
+      :url_options              => {}                         #
   }
   mattr_reader :options
 
