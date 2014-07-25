@@ -8,8 +8,9 @@ module RailsBreadcrumbs
 
     module ClassMethods
       def add_breadcrumb(name, url, options = {})
+        options = ::RailsBreadcrumbs.options.merge(options)
         before_filter options do |controller|
-          controller.send(:add_breadcrumb, name, url)
+          controller.send(:add_breadcrumb, localization(name, options), url)
         end
       end
     end
@@ -34,9 +35,7 @@ module RailsBreadcrumbs
       options = ::RailsBreadcrumbs.options.merge(options)
       path_parts = controller_path.split('/')
       path_parts.each do |segment|
-        link_name = segment.sub('_', ' ').camelcase
-        link_name = names[segment] if names.has_key?(segment)
-        name = I18n.t options[:locale_root] + segment, :default => link_name
+        name = localization(segment, options, names)
         if segment != path_parts.last
           route = nil
           path_parts.each do |temp|
@@ -55,9 +54,7 @@ module RailsBreadcrumbs
       options = ::RailsBreadcrumbs.options.merge(options)
       path_parts = controller_path.split('/') << action_name
       path_parts.each do |segment|
-        link_name = segment.sub('_', ' ').camelcase
-        link_name = names[segment] if names.has_key?(segment)
-        name = I18n.t options[:locale_root] + segment, :default => link_name
+        name = localization(segment, options, names)
         if segment != path_parts.last
           route = nil
           path_parts.each do |temp|
@@ -74,7 +71,7 @@ module RailsBreadcrumbs
 
     private
       # Add breadcrumb for page
-      def add_breadcrumb name, url = ''
+      def add_breadcrumb(name, url = '')
         @breadcrumbs ||= []
         url = eval(url.to_s) if url =~ /_path|_url|@/
         @breadcrumbs << [name, url]
@@ -94,6 +91,13 @@ module RailsBreadcrumbs
         end
         url += ")"
         url
+      end
+
+      def localization(name, options, names={})
+        name = name.to_s.underscore
+        default_name = name.sub('_', ' ').camelcase
+        default_name = names[name] if names.has_key?(name)
+        I18n.t options[:locale_root] + name, default: default_name
       end
   end
 end
