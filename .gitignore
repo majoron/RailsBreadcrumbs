@@ -1,2 +1,5 @@
 *.sw[op]
 .reviewboardrc
+*.gem
+.bundle
+.rspec
