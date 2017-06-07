@@ -36,16 +36,12 @@ module RailsBreadcrumbs
       path_parts = controller_path.split('/')
       path_parts.each do |segment|
         name = localization(segment, options, names)
-        if segment != path_parts.last
-          route = nil
-          path_parts.each do |temp|
-            route = (route.nil? ? temp: route +'_'+ temp)
-            break if temp == segment
-          end
-          link = send(route + '_path')
-        else
-          link = request.path
+        route = nil
+        path_parts.each do |temp|
+          route = (route.nil? ? temp: route +'_'+ temp)
+          break if temp == segment
         end
+        link = send(route + '_path')
         add_breadcrumb(name, link)
       end
     end
@@ -55,16 +51,12 @@ module RailsBreadcrumbs
       path_parts = controller_path.split('/') << action_name
       path_parts.each do |segment|
         name = localization(segment, options, names)
-        if segment != path_parts.last
-          route = nil
-          path_parts.each do |temp|
-            route = (route.nil? ? temp: route +'_'+ temp)
-            break if temp == segment
-          end
-          link = send(route + '_path')
-        else
-          link = request.path
+        route = nil
+        path_parts.each do |temp|
+          route = (route.nil? ? temp: route +'_'+ temp)
+          break if temp == segment
         end
+        link = send(route + '_path')
         add_breadcrumb(name, link)
       end
     end
